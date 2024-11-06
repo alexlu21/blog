@@ -17,7 +17,7 @@ const app = express();
 const salt = bcrypt.genSaltSync(10);
 const MONGO = "mongodb://mongo:gOUiqFBdycmJAoYeiyIczeMljhnpASFx@autorack.proxy.rlwy.net:26321"
 const secret = "73ff7c3ffb42fe464986b8389dad203d";
-const URL_FRONTEND = "http://localhost:3002"
+const URL_FRONTEND = "http://blog-production-c9f4.up.railway.app"
 const PORT = 3001
 
 
