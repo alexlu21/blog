@@ -11,6 +11,7 @@ const uploadMiddleware = multer({ dest: './uploads' });
 const fs = require('fs');
 const Post = require('./models/Post');
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 
@@ -51,6 +52,16 @@ async function run() {
 }
 run().catch(console.dir);
 
+//Manego del número de solicitudes
+//Esta función es mas que nada para el login por lo parámetros que se le pasan
+const reqLimiter = rateLimit({
+    windowMs: 60 * 100, //esto equivale a 1 minuto
+    max: 5, //Limita las solicitudes que se pueden hacer desde una IP, en esta caso 5
+    message: {error: "No puedes iniciar sesión ahora mismo, intentalo más tarde"},
+    standardHeaders: true, //Envia los encabezados rateLimit para avisar a los clientes
+    legacyHeaders: false //Desactiva los encabezados x-rateLimit obsoletos
+})
+
 app.post('/register', async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -64,7 +75,7 @@ app.post('/register', async (req, res) => {
     }
 });
 
-app.post('/login', async (req, res) => {
+app.post('/login', reqLimiter, async (req, res) => {
     const { username, password } = req.body;
     try {
         const userInfo = await User.findOne({ username });
