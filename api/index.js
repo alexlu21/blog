@@ -16,7 +16,7 @@ const rateLimit = require('express-rate-limit');
 const app = express();
 
 const salt = bcrypt.genSaltSync(10);
-const MONGO = "mongodb://mongo:gOUiqFBdycmJAoYeiyIczeMljhnpASFx@autorack.proxy.rlwy.net:26321"
+const MONGO = "mongodb+srv://alexlugris:RhaQNN9bsH6jEemi@bloguetus.tkohp.mongodb.net/?retryWrites=true&w=majority&appName=bloguetus"
 const secret = "73ff7c3ffb42fe464986b8389dad203d";
 const URL_FRONTEND = "https://blog-production-c9f4.up.railway.app"
 const PORT = 3001

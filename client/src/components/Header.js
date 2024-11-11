@@ -14,8 +14,8 @@ const Header = () => {
         setUserInfo(userInfo)
       })
     })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  
+  }, [setUserInfo])
 
   function logout() {
     fetch(`${URL_BACKEND}/logout`,{
